@@ -1,4 +1,4 @@
-const User = require("../models/user.js");
+const User = require("../models/user");
 
 module.exports.getUsers = (req, res) => {
   User.find({}).then((users) => {
@@ -35,7 +35,7 @@ module.exports.createUser = (req, res) => {
   User.create({ name, about, avatar })
     .then((user) => res.status(201).send({ data: user }))
     .catch((err) => {
-      if ((err.name = "ValidationError")) {
+      if (err.name === "ValidationError") {
         res.status(400).send({
           message: "Переданы некорректные данные при создании пользователя",
         });

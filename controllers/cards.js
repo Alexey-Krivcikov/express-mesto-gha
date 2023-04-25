@@ -1,4 +1,4 @@
-const Card = require("../models/card.js");
+const Card = require("../models/card");
 
 module.exports.getCards = (req, res) => {
   Card.find({}).then((cards) => {
@@ -18,11 +18,9 @@ module.exports.createCard = (req, res) => {
       .send({ data: card })
       .catch((err) => {
         if (err.name === "ValidationError") {
-          res
-            .status(400)
-            .send({
-              message: "Переданы некорректные данные при создании карточки",
-            });
+          res.status(400).send({
+            message: "Переданы некорректные данные при создании карточки",
+          });
         } else {
           res.status(500).send({ message: "Произошла ошибка" });
         }
