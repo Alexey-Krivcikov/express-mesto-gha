@@ -15,18 +15,16 @@ module.exports.getUser = (req, res) => {
       throw new Error("Пользователь не найден");
     })
     .then((user) => {
-      res
-        .status(200)
-        .send({ data: user })
-        .catch((err) => {
-          if (err.message === "Пользователь не найден") {
-            res
-              .status(404)
-              .send({ message: "Пользователь по указанному _id не найден" });
-          } else {
-            res.status(500).send({ message: "Произошла ошибка" });
-          }
-        });
+      res.status(200).send({ data: user });
+    })
+    .catch((err) => {
+      if (err.message === "Пользователь не найден") {
+        res
+          .status(404)
+          .send({ message: "Пользователь по указанному _id не найден" });
+      } else {
+        res.status(500).send({ message: "Произошла ошибка" });
+      }
     });
 };
 
