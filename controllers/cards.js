@@ -12,20 +12,16 @@ module.exports.getCards = (req, res) => {
 module.exports.createCard = (req, res) => {
   const { name, link } = req.body;
   const owner = req.user._id;
-  Card.create({ name, link, owner }).then((card) => {
-    res
-      .status(201)
-      .send({ data: card })
-      .catch((err) => {
-        if (err.name === "ValidationError") {
-          res.status(400).send({
-            message: "Переданы некорректные данные при создании карточки",
-          });
-        } else {
-          res.status(500).send({ message: "Произошла ошибка" });
-        }
-      });
-  });
+
+  Card.create({ name, link, owner })
+    .then((card) => res.status(201).send({ data: card }))
+    .catch((err) => {
+      if (err.name === "ValidationError") {
+        res.status(400).send({ message: "Переданы некорректные данные" });
+      } else {
+        res.status(500).send({ message: "Произошла ошибка" });
+      }
+    });
 };
 
 module.exports.deleteCard = (req, res) => {
