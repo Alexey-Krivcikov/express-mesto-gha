@@ -3,7 +3,6 @@ const Card = require("../models/card");
 module.exports.getCards = (req, res) => {
   Card.find({}).then((cards) => {
     res
-      .status(200)
       .send({ data: cards })
       .catch(() => res.status(500).send({ message: "Произошла ошибка" }));
   });
@@ -29,7 +28,7 @@ module.exports.deleteCard = (req, res) => {
     .orFail(() => {
       throw new Error("Карточка не найдена");
     })
-    .then((card) => res.status(200).send({ data: card }))
+    .then((card) => res.send({ data: card }))
     .catch((err) => {
       if (err.name === "CastError") {
         res.status(400).send({ message: "Переданы некорректные данные" });
@@ -50,7 +49,7 @@ module.exports.likeCard = (req, res) => {
     .orFail(() => {
       throw new Error("Карточка не найдена");
     })
-    .then((card) => res.status(200).send({ data: card }))
+    .then((card) => res.send({ data: card }))
     .catch((err) => {
       if (err.name === "CastError") {
         res.status(400).send({ message: "Переданы некорректные данные" });
@@ -71,7 +70,7 @@ module.exports.dislikeCard = (req, res) => {
     .orFail(() => {
       throw new Error("Карточка не найдена");
     })
-    .then((card) => res.status(200).send({ data: card }))
+    .then((card) => res.send({ data: card }))
     .catch((err) => {
       if (err.name === "CastError") {
         res.status(400).send({ message: "Переданы некорректные данные" });

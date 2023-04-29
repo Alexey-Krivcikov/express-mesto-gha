@@ -3,7 +3,6 @@ const User = require("../models/user");
 module.exports.getUsers = (req, res) => {
   User.find({}).then((users) => {
     res
-      .status(200)
       .send({ data: users })
       .catch(() => res.status(500).send({ message: "Произошла ошибка" }));
   });
@@ -15,7 +14,7 @@ module.exports.getUser = (req, res) => {
       throw new Error("Пользователь не найден");
     })
     .then((user) => {
-      res.status(200).send({ data: user });
+      res.send({ data: user });
     })
     .catch((err) => {
       if (err.name === "CastError") {
@@ -39,8 +38,9 @@ module.exports.createUser = (req, res) => {
         res.status(400).send({
           message: "Переданы некорректные данные при создании пользователя",
         });
+      } else {
+        res.status(500).send({ message: "Произошла ошибка" });
       }
-      res.status(500).send({ message: "Произошла ошибка" });
     });
 };
 
@@ -54,9 +54,9 @@ module.exports.updateUserInfo = (req, res) => {
     .orFail(() => {
       throw new Error("Пользователь не найден");
     })
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => res.send({ data: user }))
     .catch((err) => {
-      if (err.name === "ValidationError") {
+      if (err.name === "ValidationError" || err.name === "CastError") {
         res.status(400).send({
           message: "Переданы некорректные данные при обновлении профиля",
         });
@@ -80,9 +80,9 @@ module.exports.updateUserAvatar = (req, res) => {
     .orFail(() => {
       throw new Error("Пользователь не найден");
     })
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => res.send({ data: user }))
     .catch((err) => {
-      if (err.name === "ValidationError") {
+      if (err.name === "ValidationError" || err.name === "CastError") {
         res.status(400).send({
           message: "Переданы некорректные данные при обновлении аватара",
         });

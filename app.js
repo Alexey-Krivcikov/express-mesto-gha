@@ -1,12 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const helmet = require("helmet");
 const userRouter = require("./routes/users");
 const cardRouter = require("./routes/cards");
 
 const { PORT = 3000 } = process.env;
 const app = express();
 
+app.use(helmet());
 app.use(express.json());
+
 
 mongoose.connect("mongodb://127.0.0.1:27017/mestodb");
 
