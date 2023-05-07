@@ -6,7 +6,7 @@ const { errors } = require("celebrate");
 const userRouter = require("./routes/users");
 const cardRouter = require("./routes/cards");
 const auth = require("./middlewares/auth");
-const { login, createUser } = require("./routes/users");
+const { login, createUser } = require("./controllers/users");
 const { validateCreateUser, validateLogin } = require("./middlewares/validation");
 
 const { errorHandler } = require("./errors/errorHandler");
@@ -21,8 +21,9 @@ app.use(cookieParser());
 
 mongoose.connect("mongodb://127.0.0.1:27017/mestodb");
 
-app.post("/signin", validateLogin, login);
 app.post("/signup", validateCreateUser, createUser);
+app.post("/signin", validateLogin, login);
+
 app.use("*", () => {
   throw new NotFoundError("Некорректный путь или запрос.");
 });
