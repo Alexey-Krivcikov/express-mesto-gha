@@ -7,7 +7,7 @@
         "allow": ["_id"]
       }
     ],
-    "quotes": ["error", "double", { "allowTemplateLiterals": true }],
-    "import/no-extraneous-dependencies": ["error", {"dependencies": true }]
+    "quotes": ["error", "double", { "allowTemplateLiterals": true }]
+    // "import/no-extraneous-dependencies": ["error", {"dependencies": true }]
   }
 }
