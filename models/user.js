@@ -29,7 +29,6 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "Поле password должно быть заполнено"],
-    minlength: 8,
     select: false,
   },
   avatar: {
@@ -42,7 +41,7 @@ const userSchema = new mongoose.Schema({
     },
     default: "https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png",
   },
-}, { versionKey: false });
+}, { toJSON: { useProjection: true }, toObject: { useProjection: true }, versionKey: false });
 
 // eslint-disable-next-line func-names
 userSchema.statics.findUserByCredentials = function (email, password) {
