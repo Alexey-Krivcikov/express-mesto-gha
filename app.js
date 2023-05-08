@@ -24,14 +24,13 @@ mongoose.connect("mongodb://127.0.0.1:27017/mestodb");
 app.post("/signup", validateCreateUser, createUser);
 app.post("/signin", validateLogin, login);
 
-app.use("*", () => {
-  throw new NotFoundError("Некорректный путь или запрос.");
-});
 app.use(auth);
 
 app.use(userRouter);
 app.use(cardRouter);
-
+app.use("*", () => {
+  throw new NotFoundError("Некорректный путь или запрос.");
+});
 app.use(errors());
 
 app.use(errorHandler);
