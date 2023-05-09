@@ -8,10 +8,10 @@ const {
 } = require("../controllers/users");
 const { validateUserId, validateUpdateUserInfo, validateAvatar } = require("../middlewares/validation");
 
-userRouter.get("/users", getUsers);
-userRouter.get("/users/me", getCurrentUser);
-userRouter.get("/users/:userId", validateUserId, getUser);
-userRouter.patch("/users/me", validateUpdateUserInfo, updateUserInfo);
-userRouter.patch("/users/me/avatar", validateAvatar, updateUserAvatar);
+userRouter.get("/", getUsers);
+userRouter.get("/me", getCurrentUser);
+userRouter.get("/:userId", validateUserId, getUser);
+userRouter.patch("/me", validateUpdateUserInfo, updateUserInfo);
+userRouter.patch("/me/avatar", validateAvatar, updateUserAvatar);
 
 module.exports = userRouter;
