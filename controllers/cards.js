@@ -36,7 +36,8 @@ module.exports.deleteCard = (req, res, next) => {
     .then((card) => {
       if (card.owner.toString() === req.user._id) {
         Card.findByIdAndRemove(cardId)
-          .then(() => res.send({ data: card }));
+          .then(() => res.send({ data: card }))
+          .catch(next);
       } else {
         throw new ForbiddenError("Нет прав доступа");
       }
