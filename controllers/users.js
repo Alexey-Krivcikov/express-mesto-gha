@@ -31,8 +31,7 @@ module.exports.createUser = (req, res, next) => {
     .then((hash) => {
       User.create({
         name, about, avatar, email, password: hash,
-      }).catch(next)
-        .then((user) => res.status(201).send({ data: user }))
+      }).then((user) => res.status(201).send({ data: user }))
         .catch((err) => {
           if (err.code === 11000) {
             next(new ConflictError("Пользователь с таким email уже существует."));
@@ -42,7 +41,7 @@ module.exports.createUser = (req, res, next) => {
             next(err);
           }
         });
-    });
+    }).catch(next);
 };
 
 module.exports.getUsers = (req, res, next) => {
