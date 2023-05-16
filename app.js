@@ -12,7 +12,9 @@ const router = require("./routes/index");
 const { PORT = 3000 } = process.env;
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "https://mesto.front.end.nomoredomains.monster",
+}));
 app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
