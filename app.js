@@ -13,7 +13,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 app.use(cors({
-  origin: "http://mesto.front.end.nomoredomains.monster",
+  origin: "https://api.mesto.front.end.nomoredomains.monster",
 }));
 app.use(helmet());
 app.use(express.json());
