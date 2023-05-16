@@ -11,14 +11,14 @@ const router = require("./routes/index");
 
 const { PORT = 3000 } = process.env;
 const app = express();
-const corsOptions = {
-  origin: "https://mesto.front.end.nomoredomains.monster",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  allowedHeaders: ["Content-Type", "Authorization"],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: "https://mesto.front.end.nomoredomains.monster",
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   allowedHeaders: ["Content-Type", "Authorization"],
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204,
+// };
+app.use(cors("*"));
 
 app.use(helmet());
 app.use(express.json());
