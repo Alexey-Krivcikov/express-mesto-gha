@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 const { errors } = require("celebrate");
 const { errorHandler } = require("./errors/errorHandler");
+const { requestLogger, errorLogger } = require("./middlewares/logger");
 
 const router = require("./routes/index");
 
@@ -16,7 +17,9 @@ app.use(cookieParser());
 
 mongoose.connect("mongodb://127.0.0.1:27017/mestodb");
 
+app.use(requestLogger);
 app.use(router);
+app.use(errorLogger);
 app.use(errors());
 
 app.use(errorHandler);
