@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 const { errors } = require("celebrate");
@@ -11,6 +12,9 @@ const router = require("./routes/index");
 const { PORT = 3000 } = process.env;
 const app = express();
 
+app.use(cors({
+  origin: "http://mesto.front.end.nomoredomains.monster",
+}));
 app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
